@@ -1,10 +1,10 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
-import { displayHeader } from "./src/header.js";
-import { executeAction } from "./src/actionHandler.js";
+import { displayHeader } from "./src/header.js"; // 确保路径正确
+import { executeAction } from "./src/actionHandler.js"; // 确保路径正确
 
 async function main() {
-  displayHeader();
+  displayHeader(); // 显示项目标题和 Logo
 
   console.log(chalk.cyan.bold("\n🌟 欢迎来到 RWA Claim Bot 🌟"));
   console.log(chalk.magenta("请选择一个操作开始：\n"));
@@ -28,6 +28,7 @@ async function main() {
   console.log(chalk.green.bold("\n✅ 操作已成功完成！"));
 }
 
+// 启动主程序
 main().catch(error => {
   console.error(chalk.red("\n❌ 发生错误:", error));
 });
