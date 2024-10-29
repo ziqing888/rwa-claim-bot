@@ -6,7 +6,6 @@ export function displayHeader() {
   // 打印标题
   console.log(chalk.cyan('========================================'));
   console.log(chalk.bold(chalk.cyan('🌟        RWA 自动领取机器人         🌟')));
-  console.log(chalk.bold(chalk.green('           创建者: 子清              ')));
   console.log(chalk.magenta('🌐  电报频道: https://t.me/ksqxszq   '));
   console.log(chalk.cyan('========================================'));
 
