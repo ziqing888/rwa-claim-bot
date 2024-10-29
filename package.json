@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "自动领取 RWA 和铸造 USDC 的机器人",
   "main": "index.js",
-  "type": "module",  // 添加这一行
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
