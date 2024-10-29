@@ -28,6 +28,13 @@
   npm install
  ```
 4.配置 .env 文件：
+，使用 nano 编辑器
+```bash
+nano .env
+```
+添加私钥：
+
+在打开的 .env 文件中，输入您的钱包私钥, 请确保每个私钥之间用逗号分隔
 ```bash
 PRIVATE_KEY=你的私钥1,你的私钥2
  ```
