@@ -4,7 +4,7 @@ import { mintUSDC } from "./mint_usdc.js";
 import chalk from "chalk";
 
 // 执行用户选择的操作
-export async function executeAction(action) {
+export async function executeAction(action, wallet) {
   const { confirm } = await inquirer.prompt([
     {
       type: "confirm",
@@ -22,12 +22,10 @@ export async function executeAction(action) {
 
   // 根据用户选择的操作调用相应的功能
   try {
-    const wallet = ...; // 这里需要确保 wallet 对象已被正确创建
-
     if (action === "claim") {
-      await claimRWA(wallet);
+      await claimRWA(wallet); // 使用传递的 wallet 对象
     } else if (action === "mint") {
-      await mintUSDC(wallet);
+      await mintUSDC(wallet); // 使用传递的 wallet 对象
     }
     console.log(chalk.greenBright("✅ 操作成功完成！"));
   } catch (error) {
