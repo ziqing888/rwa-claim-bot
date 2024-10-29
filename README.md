@@ -38,6 +38,8 @@ nano .env
 ```bash
 PRIVATE_KEY=你的私钥1,你的私钥2
  ```
+按 CTRL + O 保存更改，然后按 ENTER 确认。接着按 CTRL + X 退出编辑器。
+
 运行机器人：
  ```bash
   node index.js
