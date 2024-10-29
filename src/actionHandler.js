@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { claimRWA } from "./claim_rwa.js";
+import { claimRWA } from "./claim_rwa.js";  // 确保导入路径正确
 import { mintUSDC } from "./mint_usdc.js";
 import chalk from "chalk";
 
@@ -25,12 +25,13 @@ export async function executeAction(action) {
   // 根据用户选择的操作调用相应的功能
   try {
     if (action === "claim") {
-      await claimRWA();
+      await claimRWA();  // 领取 RWA
     } else if (action === "mint") {
-      await mintUSDC();
+      await mintUSDC();  // 铸造 USDC
     }
     console.log(chalk.greenBright("✅ 操作成功完成！"));
   } catch (error) {
     console.error(chalk.red("❌ 操作过程中发生错误:"), error.message);
   }
 }
+
