@@ -39,36 +39,4 @@ PRIVATE_KEY=你的私钥1,你的私钥2
 如果启动时提示缺少 PRIVATE_KEY 环境变量，请检查 .env 文件格式并确保私钥配置正确。
 
 感谢您的使用！如有问题，请在电报频道联系：https://t.me/ksqxszq
- ```bash
-
-#### 4. `package.json`
-
-```json
-{
-  "name": "rwa-claim-bot",
-  "version": "1.0.0",
-  "description": "自动领取和铸造 Token 的机器人",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "inquirer": "^8.2.0",
-    "ethers": "^6.0.0",
-    "chalk": "^5.0.0",
-    "dotenv": "^10.0.0"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ziqing888/rwa-claim-bot.git"
-  },
-  "keywords": [
-    "Token",
-    "Claim",
-    "Bot",
-    "Automation"
-  ],
-  "author": "子清"
-}
-```
+ 
