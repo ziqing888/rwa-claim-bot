@@ -1,6 +1,6 @@
 import inquirer from "inquirer";
 import { claimRWA } from "./claim_rwa.js";  // 确保导入路径正确
-import { mintUSDC } from "./mint_usdc.js";
+import { mintUSDC } from "./mint_usdc.js";   // 确保导入路径正确
 import chalk from "chalk";
 
 // 执行用户选择的操作
@@ -25,9 +25,9 @@ export async function executeAction(action) {
   // 根据用户选择的操作调用相应的功能
   try {
     if (action === "claim") {
-      await claimRWA();  // 领取 RWA
+      await claimRWA();  // 调用领取 RWA 的函数
     } else if (action === "mint") {
-      await mintUSDC();  // 铸造 USDC
+      await mintUSDC();  // 调用铸造 USDC 的函数
     }
     console.log(chalk.greenBright("✅ 操作成功完成！"));
   } catch (error) {
