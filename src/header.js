@@ -1,17 +1,19 @@
-import chalk from "chalk";
-import { exec } from "child_process";
+import chalk from 'chalk';
 
 export function displayHeader() {
-  exec('curl -s https://raw.githubusercontent.com/ziqing888/logo.sh/refs/heads/main/logo.sh | bash', (error, stdout, stderr) => {
-    if (error) {
-      console.error(chalk.red("❌ 无法加载 Logo:"), stderr);
-    } else {
-      console.log(stdout);
-      console.log(chalk.white.bold("\n🎉 欢迎使用 RWA Claim Bot 🎉"));
-      console.log(chalk.gray("项目出处: 子清"));
-      console.log(chalk.gray("电报频道: https://t.me/ksqxszq"));
-      console.log(chalk.yellow("\n请仔细阅读每个步骤的提示，以获得更好的操作体验！"));
-      console.log(chalk.magenta("==================================================\n"));
-    }
-  });
+  process.stdout.write('\x1Bc'); // 清屏
+
+  // 打印标题
+  console.log(chalk.cyan('========================================'));
+  console.log(chalk.bold(chalk.cyan('🌟        RWA 自动领取机器人         🌟')));
+  console.log(chalk.bold(chalk.green('           创建者: 子清              ')));
+  console.log(chalk.magenta('🌐  电报频道: https://t.me/ksqxszq   '));
+  console.log(chalk.cyan('========================================'));
+
+  // 显示当前时间
+  console.log(chalk.yellow(`当前时间: ${new Date().toLocaleString()}`));
+
+  // 添加分隔线
+  console.log(chalk.magenta("=================================================="));
 }
+
