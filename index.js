@@ -10,8 +10,8 @@ async function main() {
   console.log(chalk.magenta("请选择一个操作开始：\n"));
 
   const actions = [
-    { name: "领取奖励 Token 🏆", value: "claim" },
-    { name: "铸造新 Token 🏗️", value: "mint" }
+    { name: "领取 RWA 🏆", value: "claim" },
+    { name: "铸造 USDC 🏗️", value: "mint" }
   ];
 
   const { action } = await inquirer.prompt([
