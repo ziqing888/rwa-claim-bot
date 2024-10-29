@@ -32,7 +32,7 @@ const abi = [
 ];
 
 // 铸造 USDC 的核心逻辑
-export async function mintUSDC(wallet) {
+export async function mintUSDC(wallet) {  // 确保正确导出
   const contract = new ethers.Contract(contractAddress, abi, wallet);
   const address = wallet.address;
   const mintAmount = ethers.parseUnits("1000", 6);  // 铸造金额设为 1000 USDC
@@ -53,6 +53,4 @@ export async function mintUSDC(wallet) {
       console.error(chalk.bgRedBright.black("❌ 交易失败:"), error.message);
     }
   }
-  console.log(chalk.yellow("—————————————————————————"));
-}
-
+  console.log(chalk.yellow("————————————————
