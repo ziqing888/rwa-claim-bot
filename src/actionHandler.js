@@ -1,12 +1,10 @@
 import inquirer from "inquirer";
-import { claimRWA } from "./claim_rwa.js";  // 确保导入路径正确
-import { mintUSDC } from "./mint_usdc.js";   // 确保导入路径正确
+import { claimRWA } from "./claim_rwa.js";
+import { mintUSDC } from "./mint_usdc.js";
 import chalk from "chalk";
 
 // 执行用户选择的操作
 export async function executeAction(action) {
-  console.log(chalk.magentaBright(`\n🚀 您选择的操作: ${action === "claim" ? "领取 RWA" : "铸造 USDC"}`));
-  
   const { confirm } = await inquirer.prompt([
     {
       type: "confirm",
@@ -24,15 +22,15 @@ export async function executeAction(action) {
 
   // 根据用户选择的操作调用相应的功能
   try {
+    const wallet = ...; // 这里需要确保 wallet 对象已被正确创建
+
     if (action === "claim") {
-      await claimRWA();  // 调用领取 RWA 的函数
+      await claimRWA(wallet);
     } else if (action === "mint") {
-      await mintUSDC();  // 调用铸造 USDC 的函数
+      await mintUSDC(wallet);
     }
     console.log(chalk.greenBright("✅ 操作成功完成！"));
   } catch (error) {
     console.error(chalk.red("❌ 操作过程中发生错误:"), error.message);
   }
 }
-
-
