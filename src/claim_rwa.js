@@ -29,15 +29,24 @@ const abi = [
 ];
 
 // 领取 RWA 的核心逻辑
-export async function claimRWA(wallet) {  // 确保正确导出
-  const contract = new ethers.Contract(contractAddress, abi, wallet);
+export async function claimRWA(wallet) {
+  if (!wallet) {
+    console.error(chalk.red("❌ 钱包对象未定义，请检查钱包的创建过程。"));
+    return;
+  }
+
   const address = wallet.address;
+  
+  if (!address) {
+    console.error(chalk.red("❌ 钱包地址未定义，请检查钱包的创建过程。"));
+    return;
+  }
 
   console.log(chalk.cyanBright(`\n📬 正在处理钱包地址: ${address}`));
-  console.log(chalk.yellow("—————————————————————————"));
 
   try {
     console.log(chalk.yellowBright("📤 正在发送领取 RWA 请求..."));
+    const contract = new ethers.Contract(contractAddress, abi, wallet);
     const tx = await contract.claimTokens({ gasPrice });
     
     console.log(chalk.greenBright("✅ 领取成功！"));
@@ -49,5 +58,4 @@ export async function claimRWA(wallet) {  // 确保正确导出
       console.error(chalk.bgRedBright.black("❌ 领取失败:"), error.message);
     }
   }
-  console.log(chalk.yellow("—————————————————————————"));
 }
