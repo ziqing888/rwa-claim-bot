@@ -33,7 +33,7 @@ async function claimTokens(wallet) {
   const contract = new ethers.Contract(contractAddress, abi, wallet);
   const address = wallet.address;
 
-  console.log(chalk.cyanBright(`\n📬 处理钱包地址: ${address}`));
+  console.log(chalk.cyanBright(`\n📬 正在处理钱包地址: ${address}`));
   console.log(chalk.yellow("—————————————————————————"));
 
   try {
@@ -73,3 +73,4 @@ main().catch(error => {
   console.error(chalk.bgRed.white("❌ 程序执行时出错:"), error);
   process.exit(1);
 });
+
