@@ -7,7 +7,7 @@ dotenv.config();
 
 // 检查是否配置了私钥
 if (!process.env.PRIVATE_KEY) {
-  console.error(chalk.redBright("🚨 缺少必需的环境变量: PRIVATE_KEY\n请在 .env 文件中配置您的钱包私钥！"));
+  console.error(chalk.red("🚨 缺少必需的环境变量: PRIVATE_KEY\n请在 .env 文件中配置您的私钥！"));
   process.exit(1);
 }
 
@@ -29,7 +29,7 @@ const abi = [
 ];
 
 // 领取 RWA 的核心逻辑
-async function claimTokens(wallet) {
+export async function claimRWA(wallet) {  // 确保正确导出
   const contract = new ethers.Contract(contractAddress, abi, wallet);
   const address = wallet.address;
 
@@ -40,7 +40,6 @@ async function claimTokens(wallet) {
     console.log(chalk.yellowBright("📤 正在发送领取 RWA 请求..."));
     const tx = await contract.claimTokens({ gasPrice });
     
-    // 输出交易信息
     console.log(chalk.greenBright("✅ 领取成功！"));
     console.log(`🔗 查看交易详情: ${chalk.blueBright(`https://sepolia.basescan.org/tx/${tx.hash}`)}`);
   } catch (error) {
@@ -52,25 +51,3 @@ async function claimTokens(wallet) {
   }
   console.log(chalk.yellow("—————————————————————————"));
 }
-
-// 主流程控制函数
-async function main() {
-  console.log(chalk.magentaBright("🎉 === 开始自动领取 RWA 流程 === 🎉\n"));
-
-  for (const privateKey of privateKeys) {
-    const wallet = new ethers.Wallet(privateKey, provider);
-    await claimTokens(wallet);
-  }
-
-  // 等待 65 分钟后重新运行
-  console.log(chalk.magentaBright("⏰ 将在 65 分钟后再次尝试领取 RWA。"));
-  console.log(chalk.gray("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
-  setTimeout(main, 65 * 60 * 1000);
-}
-
-// 启动主函数
-main().catch(error => {
-  console.error(chalk.bgRed.white("❌ 程序执行时出错:"), error);
-  process.exit(1);
-});
-
