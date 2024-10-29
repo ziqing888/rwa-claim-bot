@@ -53,4 +53,6 @@ export async function mintUSDC(wallet) {  // 确保正确导出
       console.error(chalk.bgRedBright.black("❌ 交易失败:"), error.message);
     }
   }
-  console.log(chalk.yellow("————————————————
+  console.log(chalk.yellow("—————————————————————————"));
+}
+
