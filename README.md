@@ -49,9 +49,13 @@ https://superbridge.app/base-sepolia
 
 ## 使用步骤 🚀
 
-1. **克隆仓库：**
-   ```bash
-  git clone https://github.com/ziqing888/rwa-claim-bot.git && cd rwa-claim-bot
+1. 克隆仓库：
+```bash
+git clone https://github.com/ziqing888/rwa-claim-bot.git && cd rwa-claim-bot
+
+
+```
+ 
 
 2.运行
 
