@@ -1,8 +1,8 @@
-{{
+{
   "name": "trwa-launchpad-bot.git",
   "version": "1.0.0",
   "type": "module",
-  "description": "TRWA Bot is a powerful tool designed for you to automate TRWA Testnet airdrop.",
+  "description": "TRWA 机器人是一个强大的工具，旨在帮助您自动执行 TRWA 测试网空投任务。",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -13,7 +13,7 @@
   },
   "keywords": [
     "trwa-launchpad",
-    "trwa-launchpad-bot.git",
+    "trwa-launchpad-bot",
     "evm-bot",
     "base-sepolia",
     "widiskel"
@@ -38,3 +38,4 @@
     "winston": "^3.13.0"
   }
 }
+
