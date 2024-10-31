@@ -1,12 +1,44 @@
-# 忽略 node_modules 文件夹
-node_modules/
+# 忽略 node_modules 目录
+node_modules
 
-# 忽略包含敏感信息的 .env 文件
-.env
+# 忽略日志文件夹及其所有内容
+log/*
 
-# 忽略日志文件
-*.log
+# 忽略测试文件
+test.js
 
-# 忽略操作系统生成的文件
+# 忽略会话数据文件夹
+sessions/*
+
+# 忽略账户配置文件
+accounts/accounts.js
+
+# 忽略参考资料目录
+src/reference/*
+
+# 忽略 package-lock 文件
+package-lock.json
+
+# 忽略 macOS 系统文件
 .DS_Store
-Thumbs.db
+
+# 忽略配置文件
+config/config.js
+config/proxy_list.js
+
+# 忽略数据库文件
+database.db
+
+# 忽略应用的账户和配置文件夹
+app/accounts
+app/config
+
+# 忽略根目录下的 index.js 文件
+# /index.js
+
+# 忽略 build 配置文件
+# build-config.json
+
+# 忽略 src 文件夹
+# /src
+
