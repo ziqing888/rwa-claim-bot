@@ -1,51 +1,114 @@
-import inquirer from "inquirer";
-import { displayHeader } from "./src/header.js";
-import { executeAction } from "./src/actionHandler.js";
-import { ethers } from "ethers"; // 导入 ethers
-import dotenv from "dotenv"; // 导入 dotenv
-import chalk from "chalk"; // 导入 chalk
+import { accountLists } from "./accounts/accounts.js";
+import { Config } from "./config/config.js";
+import { proxyList } from "./config/proxy_list.js";
+import Core from "./src/core/core.js";
+import sqlite from "./src/core/db/sqlite.js";
+import { Helper } from "./src/utils/helper.js";
+import logger from "./src/utils/logger.js";
 
-// 加载环境变量
-dotenv.config();
+async function 操作(acc, proxy) {
+  const core = new Core(acc, proxy);
+  try {
+    await core.connectWallet();
+    await core.getBalance();
+    await core.conectRwaDapps();
 
-// 主程序入口
-async function main() {
-  displayHeader(); // 显示程序头部信息
+    await core.claimTrwa();
+    await core.mintUsdc();
 
-  // 检查是否配置了私钥
-  if (!process.env.PRIVATE_KEY) {
-    console.error(chalk.red("🚨 缺少必需的环境变量: PRIVATE_KEY\n请在 .env 文件中配置您的私钥！"));
-    return;
-  }
+    await core.getStakingPoolList();
+    const targetPool = core.targetPool;
+    for (const item of core.stakingPool.filter(
+      (item) =>
+        targetPool.includes(item.pool_address) && item.staking_type == "linear"
+    )) {
+      if (core.balance.TRWA < Config.TRWASTAKINGAMOUNT) {
+        await Helper.delay(
+          3000,
+          acc,
+          `当前 TRWA 数量为 ${core.balance.TRWA} TRWA，小于配置的质押数量 ${Config.TRWASTAKINGAMOUNT} TRWA`,
+          core
+        );
+        break;
+      }
+      await core.stake(item);
+    }
 
-  // 初始化区块链提供者
-  const provider = new ethers.JsonRpcProvider("https://base-sepolia-rpc.publicnode.com");
-  const privateKeys = process.env.PRIVATE_KEY.split(',').map(key => key.trim());
+    const delay = 60000 * 60;
+    const account = accountLists.find((item) => item == acc);
+    const accIdx = accountLists.indexOf(account);
+    await Helper.delay(
+      delay,
+      acc,
+      `账户 ${accIdx + 1} 处理完成，延迟时间为 ${Helper.msToTime(delay)}`,
+      core
+    );
+    await 操作(acc, proxy);
+  } catch (error) {
+    let account = acc;
+    if (error.message) {
+      await Helper.delay(
+        10000,
+        acc,
+        `错误 : ${error.message}，10 秒后重试`,
+        core
+      );
+    } else {
+      await Helper.delay(
+        10000,
+        acc,
+        `错误 :${JSON.stringify(error)}，10 秒后重试`,
+        core
+      );
+    }
 
-  // 提示用户选择操作
-  const actions = [
-    { name: "🎉 领取 -RWA  ", value: "claim" },
-    { name: "💸 铸造 -USDC  ", value: "mint" }
-  ];
-
-  // 用户选择操作
-  const { action } = await inquirer.prompt([
-    {
-      type: "list",
-      name: "action",
-      message: chalk.cyan("请选择一个操作："),
-      choices: actions,
-    },
-  ]);
-
-  // 创建钱包并传递给操作处理函数
-  for (const privateKey of privateKeys) {
-    const wallet = new ethers.Wallet(privateKey.trim(), provider);
-    await executeAction(action, wallet); // 传递 wallet 对象
+    await 操作(account, proxy);
   }
 }
 
-// 启动主程序
-main().catch(error => {
-  console.error(chalk.red("\n❌ 发生错误:", error));
-});
+async function 启动机器人() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      logger.info(`机器人启动`);
+      if (accountLists.length == 0)
+        throw Error("请先在 accounts.js 文件中输入账户");
+
+      if (proxyList.length != accountLists.length && proxyList.length != 0)
+        throw Error(
+          `您有 ${accountLists.length} 个账户，但提供了 ${proxyList.length} 个代理`
+        );
+
+      const promiseList = [];
+
+      for (const acc of accountLists) {
+        const accIdx = accountLists.indexOf(acc);
+        const proxy = proxyList[accIdx];
+
+        promiseList.push(操作(acc, proxy));
+      }
+
+      await sqlite.createTable();
+      await Promise.all(promiseList);
+      resolve();
+    } catch (error) {
+      logger.info(`机器人已停止`);
+      logger.error(JSON.stringify(error));
+      reject(error);
+    }
+  });
+}
+
+(async () => {
+  try {
+    logger.clear();
+    logger.info("");
+    logger.info("应用程序启动");
+    console.log("RWA 机器人启动");
+    console.log();
+    Helper.showSkelLogo();
+    await 启动机器人();
+  } catch (error) {
+    console.log("执行机器人时出错", error);
+    await 启动机器人();
+  }
+})();
