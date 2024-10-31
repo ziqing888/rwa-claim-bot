@@ -1,30 +1,40 @@
-{
-  "name": "rwa-claim-bot",
+{{
+  "name": "trwa-launchpad-bot.git",
   "version": "1.0.0",
-  "description": "自动领取 RWA 和铸造 USDC 的机器人",
-  "main": "index.js",
   "type": "module",
+  "description": "TRWA Bot is a powerful tool designed for you to automate TRWA Testnet airdrop.",
+  "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "setup": "node setup.js",
+    "dev": "node index.js",
+    "build": "rm -rf app && javascript-obfuscator --config build-config.json",
+    "test": "node test.js"
   },
-  "dependencies": {
-    "inquirer": "^8.2.0",
-    "ethers": "^6.0.0",
-    "chalk": "^5.0.0",
-    "dotenv": "^10.0.0"
-  },
+  "keywords": [
+    "trwa-launchpad",
+    "trwa-launchpad-bot.git",
+    "evm-bot",
+    "base-sepolia",
+    "widiskel"
+  ],
+  "author": "子清",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/ziqing888/rwa-claim-bot.git"
   },
-  "keywords": [
-    "RWA",
-    "USDC",
-    "Claim",
-    "Mint",
-    "Bot",
-    "Automation"
-  ],
-  "author": "子清"
+  "dependencies": {
+    "bip39": "^3.1.0",
+    "blessed": "^0.1.81",
+    "ethers": "^6.13.2",
+    "https-proxy-agent": "^7.0.5",
+    "input": "^1.0.1",
+    "moment-timezone": "^0.5.45",
+    "node-fetch": "^3.3.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
+    "twisters": "^1.1.0",
+    "winston": "^3.13.0"
+  }
 }
