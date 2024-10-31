@@ -51,7 +51,8 @@ https://superbridge.app/base-sepolia
 
 1. 克隆仓库：
 ```bash
-git clone https://github.com/ziqing888/rwa-claim-bot.git && cd rwa-claim-bot
+git clone https://github.com/ziqing888/trwa-launchpad-bot
+.git && cd rwa-claim-bot
 
 
 ```
