@@ -1,0 +1,24 @@
+{
+  "input": ".",  // 输入目录，即需要混淆的代码根目录
+  "output": "app",  // 输出目录，混淆后的代码将保存到此目录
+  "exclude": [
+    "node_modules",  // 排除的目录或文件，不进行混淆
+    "test.js",
+    "accounts",
+    "config",
+    "src/reference",
+    "setup.js",
+    "start.js"
+  ],
+  "compact": true,  // 启用代码压缩，减少文件大小
+  "deadCodeInjection": true,  // 启用死代码注入，增加代码阅读的难度
+  "deadCodeInjectionThreshold": 0.4,  // 死代码注入的比例，0.4 表示 40%
+  "selfDefending": true,  // 启用自我防护，使得代码修改变得困难
+  "controlFlowFlattening": true,  // 启用控制流扁平化，增加代码复杂性
+  "controlFlowFlatteningThreshold": 0.1,  // 控制流扁平化的比例，0.1 表示 10%
+  "stringArray": true,  // 启用字符串数组转换，将字符串放入数组中进行引用
+  "rotateStringArray": true,  // 启用字符串数组旋转，增加字符串数组的复杂性
+  "stringArrayThreshold": 0.3,  // 字符串数组转换的比例，0.3 表示 30%
+  "stringArrayEncoding": ["rc4"],  // 启用字符串数组编码，使用 rc4 编码方式
+  "disableConsoleOutput": true  // 禁用控制台输出，移除 console.log 等控制台输出
+}
